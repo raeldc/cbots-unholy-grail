@@ -4,7 +4,6 @@ using cAlgo.API;
 using cAlgo.API.Indicators;
 using cAlgo.API.Internals;
 using cAlgo.Indicators;
-using System.Collections.Generic;
 
 namespace cAlgo.Robots
 {
@@ -36,14 +35,14 @@ namespace cAlgo.Robots
 
         protected override void OnTick()
         {
-            foreach (Position position in Positions.FindAll("", Symbol))
+            foreach (Position OpenPosition in Positions.FindAll("", Symbol))
             {
-                double ProtectiveStopPrice = GetProtectiveStopPrice(position);
+                double ProtectiveStopPrice = GetProtectiveStopPrice(OpenPosition);
 
                 if (ProtectiveStopPrice > 0)
                 {
                     Print("Moved ProtectiveStopLoss to: " + ProtectiveStopPrice);
-                    ModifyPosition(position, ProtectiveStopPrice, position.TakeProfit);
+                    ModifyPosition(OpenPosition, ProtectiveStopPrice, OpenPosition.TakeProfit);
                 }
             }
         }
@@ -70,28 +69,28 @@ namespace cAlgo.Robots
             }
         }
 
-        private double GetProtectiveStopPrice(Position position)
+        private double GetProtectiveStopPrice(Position OpenPosition)
         {
             for (int i = 0; i < Waves * 2; i++)
             {
-                if (position.Pips >= WaveInterval * (i + 1))
+                if (OpenPosition.Pips >= WaveInterval * (i + 1))
                 {
                     double ProtectiveStopSize = ((i * WaveInterval) + PSLAddPips) * Symbol.PipSize;
 
-                    if (position.TradeType == TradeType.Buy)
+                    if (OpenPosition.TradeType == TradeType.Buy)
                     {
-                        double ProtectiveStopPrice = position.EntryPrice + ProtectiveStopSize;
+                        double ProtectiveStopPrice = OpenPosition.EntryPrice + ProtectiveStopSize;
 
-                        if(position.StopLoss == null || position.StopLoss < ProtectiveStopPrice)
+                        if(OpenPosition.StopLoss == null || OpenPosition.StopLoss < ProtectiveStopPrice)
                         {
                             return ProtectiveStopPrice;
                         }
                     }
-                    else if(position.TradeType == TradeType.Sell)
+                    else if(OpenPosition.TradeType == TradeType.Sell)
                     {
-                        double ProtectiveStopPrice = position.EntryPrice - ProtectiveStopSize;
+                        double ProtectiveStopPrice = OpenPosition.EntryPrice - ProtectiveStopSize;
 
-                        if(position.StopLoss == null || position.StopLoss > ProtectiveStopPrice)
+                        if(OpenPosition.StopLoss == null || OpenPosition.StopLoss > ProtectiveStopPrice)
                         {
                             return ProtectiveStopPrice;
                         }
