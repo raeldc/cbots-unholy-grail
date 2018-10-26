@@ -26,8 +26,8 @@ namespace cAlgo.Robots
         {
             CancelPendingOrders();
 
-            ExecuteMarketOrder(TradeType.Buy, Symbol, Volume, "", null, null, null);
-            ExecuteMarketOrder(TradeType.Sell, Symbol, Volume, "", null, null, null);
+            ExecuteMarketOrderAsync(TradeType.Buy, Symbol, Volume, "", null, null, null);
+            ExecuteMarketOrderAsync(TradeType.Sell, Symbol, Volume, "", null, null, null);
 
             CreateWaves(TradeType.Buy);
             CreateWaves(TradeType.Sell);
@@ -54,7 +54,7 @@ namespace cAlgo.Robots
             for (int i = 0; i < Waves; i++)
             {
                 TargetPrice = type == TradeType.Buy ? TargetPrice + WaveInterval * Symbol.PipSize : TargetPrice - WaveInterval * Symbol.PipSize;
-                PlaceStopOrder(type, Symbol, Volume, TargetPrice, "", null, null, null);
+                PlaceStopOrderAsync(type, Symbol, Volume, TargetPrice, "", null, null, null);
             }
         }
 
@@ -95,7 +95,6 @@ namespace cAlgo.Robots
                             return ProtectiveStopPrice;
                         }
                     }
-                    
                 }
             }
 
