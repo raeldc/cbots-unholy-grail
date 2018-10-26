@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unholy Grail++", "Unholy Grail++\Unholy Grail++.csproj", "{703FFD9E-3C50-473B-918D-D5FC335ED215}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{703FFD9E-3C50-473B-918D-D5FC335ED215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{703FFD9E-3C50-473B-918D-D5FC335ED215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{703FFD9E-3C50-473B-918D-D5FC335ED215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{703FFD9E-3C50-473B-918D-D5FC335ED215}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
