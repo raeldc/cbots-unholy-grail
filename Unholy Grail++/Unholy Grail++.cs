@@ -71,9 +71,11 @@ namespace cAlgo.Robots
 
         private double GetProtectiveStopPrice(Position OpenPosition)
         {
+            double PipGain = OpenPosition.TradeType == TradeType.Buy ? (Symbol.Ask - OpenPosition.EntryPrice) / Symbol.PipSize: (OpenPosition.EntryPrice - Symbol.Bid) / Symbol.PipSize;
+
             for (int i = 0; i < Waves * 2; i++)
             {
-                if (OpenPosition.Pips >= WaveInterval * (i + 1))
+                if (PipGain >= WaveInterval * (i + 1))
                 {
                     double ProtectiveStopSize = ((i * WaveInterval) + PSLAddPips) * Symbol.PipSize;
 
