@@ -73,11 +73,11 @@ namespace cAlgo.Robots
         {
             double PipGain = OpenPosition.TradeType == TradeType.Buy ? (Symbol.Ask - OpenPosition.EntryPrice) / Symbol.PipSize: (OpenPosition.EntryPrice - Symbol.Bid) / Symbol.PipSize;
 
-            for (int i = 0; i < Waves * 2; i++)
+            for (int Milestone = (int)(PipGain % WaveInterval); Milestone > 0; Milestone--)
             {
-                if (PipGain >= WaveInterval * (i + 1))
+                if (PipGain >= WaveInterval * Milestone)
                 {
-                    double ProtectiveStopSize = ((i * WaveInterval) + PSLAddPips) * Symbol.PipSize;
+                    double ProtectiveStopSize = (((Milestone - 1) * WaveInterval) + PSLAddPips) * Symbol.PipSize;
 
                     if (OpenPosition.TradeType == TradeType.Buy)
                     {
